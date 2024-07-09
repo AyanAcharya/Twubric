@@ -1,0 +1,325 @@
+:root {
+  --surface-color: #fff;
+  --curve: 20px;
+  --primary-color: #204c61;
+  --secondary-color: #b41f64;
+  --background-color: #e5f7f8;
+  --low-color: #ff0000aa;
+  --avg-color: #e9d30cd8;
+  --high-color: #17b169c3;
+  --default-color: #d3d3d3;
+  --asc-color: #4e2fff;
+  --desc-color: #109669;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+  background-color: var(--background-color);
+}
+
+.ui.grid.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--curve);
+  background-color: var(--surface-color);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card__image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card__total {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--surface-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+}
+
+.card:hover .card__image {
+  transform: scale(1.1);
+}
+
+.card__initial-details {
+  padding: 1em;
+  text-align: center;
+}
+
+.card__status {
+  font-size: 0.9em;
+  color: var(--secondary-color);
+}
+
+.card__title {
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.card__details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: var(--background-color);
+  padding: 1.5em;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .card__details {
+  transform: translateY(0);
+}
+
+.card__header {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.card__description {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.card__twubric {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 1em;
+  text-align: center;
+}
+
+.card__twubric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__twubric-value {
+  width: 50px;
+  height: 50px;
+  color: var(--surface-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.card__twubric-item p {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.card__remove-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--primary-color);
+  padding: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card__remove-button:hover {
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+}
+
+.card__twubric-value--low {
+  background-color: var(--low-color);
+  border: 4px solid rgb(238, 45, 71);
+}
+
+.card__twubric-value--average {
+  background-color: var(--avg-color);
+  border: 4px solid rgb(255, 221, 2);
+}
+
+.card__twubric-value--high {
+  background-color: var(--high-color);
+  border: 4px solid rgb(0, 251, 134);
+}
+
+.date-picker-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.date-picker {
+  width: 200px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.date-picker:hover,
+.date-picker:focus {
+  border-color: var(--asc-color);
+  outline: none;
+}
+
+.react-datepicker__current-month {
+  border-radius: 1rem;
+  background-color: var(--high-color);
+}
+
+.react-datepicker__day-name {
+  background-color: var(--high-color);
+  border-radius: 1rem;
+}
+
+@media (max-width: 768px) {
+  .date-picker-container {
+    justify-content: center;
+  }
+
+  .date-picker {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+  border: none;
+  padding: 0.5rem 2rem;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: unset;
+}
+
+button:disabled {
+  background-color: var(--primary-color);
+  opacity: 50%;
+  cursor: not-allowed;
+}
+
+.sort-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1rem 1rem 1rem 2rem;
+}
+
+.sort-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid var(--surface-color);
+}
+
+.sort-button.asc {
+  background-color: var(--asc-color);
+}
+
+.sort-button.desc {
+  background-color: var(--desc-color);
+}
+
+.sort-button.default {
+  background-color: var(--primary-color);
+  opacity: 60%;
+  padding: 1rem;
+}
+
+.sort-button:hover {
+  opacity: unset;
+}
+
+.sort-button span {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.ui.fixed.menu {
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  opacity: 80%;
+}
+
+.ui.fixed.menu h2 {
+  margin: 0;
+  font-size: 3rem;
+  padding-left: 4rem;
+}
+
+.no_data_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no_data_container img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
